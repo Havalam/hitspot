@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+<!---->
+{% block content %}
+<div>
+    {% for usuario in usuarios %}
+        <div class="card border-primary mb-3" style="width: 24rem;">
+            <div class="card-body">
+                <h5 class="card-title">Nome</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Ultimo Login: </li>
+                <li class="list-group-item">Horas Ativo Essa Semana: </li>
+                <li class="list-group-item"><a href="#" class="card-link">Relatorios</a></li>
+            </ul>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
