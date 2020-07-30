@@ -4,14 +4,14 @@ from django.contrib.auth.models import User as djangoUser
 class Relatorio:
     def __init__(
             self,
-            membro=None,
+            username=None,
             conteudo=None,
             curso=None,
             naula=None,
             checkin=None,
             checkout=None
     ):
-        self.membro = membro
+        self.username = username
         self.conteudo = conteudo
         self.curso = curso
         self.naula = naula
@@ -21,7 +21,7 @@ class Relatorio:
     @staticmethod
     def from_json(dados):
         return Relatorio(
-            membro=dados['membro'],
+            username=dados['username'],
             conteudo=dados['conteudo'],
             curso=dados['curso'],
             naula=dados['naula'],
@@ -31,7 +31,7 @@ class Relatorio:
 
     def to_json(self):
         return {
-            'membro': self.membro,
+            'username': self.username,
             'conteudo': self.conteudo,
             'curso': self.curso,
             'naula': self.naula,
@@ -45,39 +45,48 @@ class Usuario:
             self,
             username=None,
             last_login=None,
-            situacao=None,
             pwd=None,
             hrs_semana=None,
-            email=None
+            email=None,
+            relatorios=None
     ):
         self.username = username
         self.last_login = last_login
-        self.situacao = situacao
         self._pwd = pwd
         self.hrs_semana = hrs_semana
         self.email = email if email else "null@null.com"
+        self.relatorios = relatorios
 
     @staticmethod
     def from_json(dados):
         return Usuario(
             username=dados['username'],
             last_login=dados['last_login'],
-            situacao=dados['situacao'],
             hrs_semana=dados['hrs_semana']
+        )
+
+    @staticmethod
+    def from_djangoUser(user):
+        return Usuario(
+            username=user.username,
+            last_login=user.last_login,
         )
 
     def to_json(self):
         return {
             'username': self.username,
             'last_login': self.last_login,
-            'situacao': self.situacao,
             'hrs_semana': self.hrs_semana
         }
 
     def create_and_save(self):
-        djangoUser.objects.create_user(self.nome, self.email, self._pwd)
+        djangoUser.objects.create_user(self.username, self.email, self._pwd)
+
+    @staticmethod
+    def get_all():
+        return djangoUser.objects.all()
 
 
 # to add a user
-# Usuario(nome="slim", pwd="123").create_and_save()
+# Usuario(username="slim", pwd="123").create_and_save()
 # print("Usuario adicionado!")

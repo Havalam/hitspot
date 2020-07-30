@@ -5,5 +5,5 @@ urlpatterns = [
     path("", index, name="index"),
     path("login", logar_usuario, name="login"),
     path("area_membros", area_membros, name="area_membros"),
-    path("relatorios_membro", relatorios_membro, name="relatorios_membro")
+    path("relatorios_membro/<str:pk>", relatorios_membro, name="relatorios_membro")
 ]
