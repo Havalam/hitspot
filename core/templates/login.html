@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+<!---->
+{% block content %}
+<div class="card mid_width border-primary mb-3 top_space">
+    <div class="card-header">
+        Check In
+    </div>
+    <form class="card-body" action="{% url 'login' %}", method="post" autocomplete="off">
+        {% csrf_token %}
+        <input type="text" name="username" class="form-control" placeholder="Usuario" required>
+        <input type="password" name="pwd" class="form-control" placeholder="Senha" required>
+        <button type="submit" class="btn btn-primary top_space">Login</a>
+    </form>
+</div>
+{% if erro %}
+<h5 class="spanalert mid_width">Usuario e/ou senha incorretos</h5>
+{% endif %}
+{% endblock %}

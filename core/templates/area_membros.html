@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+<!---->
+{% block content %}
+<div>
+    {% if usuarios %}
+    {% for usuario in usuarios %}
+    <div class="card border-primary mb-3" style="width: 24rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ usuario.username }}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Ultimo login: <b>{{ usuario.last_login }}</b></li>
+            <li class="list-group-item">Ativo esta semana: <b>{{ usuario.hrs_semana }}</b></li>
+            <li class="list-group-item">
+                <a href="{% url 'relatorios_membro' usuario.username %}" class="card-link">Relatorios</a>
+            </li>
+        </ul>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h1>Ainda não há usuarios registrados.</h1>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,44 +1,92 @@
+from django.contrib.auth.models import User as djangoUser
+
+
 class Relatorio:
     def __init__(
             self,
-            membro=None,
-            data=None,
-            conteudo=None
+            username=None,
+            conteudo=None,
+            curso=None,
+            naula=None,
+            checkin=None,
+            checkout=None
     ):
-        self.membro = membro
-        self.data = data
+        self.username = username
         self.conteudo = conteudo
+        self.curso = curso
+        self.naula = naula
+        self.checkin = checkin
+        self.checkout = checkout
 
     @staticmethod
     def from_json(dados):
         return Relatorio(
-            membro=dados['membro'],
-            data=dados['data'],
-            conteudo=dados['conteudo']
+            username=dados['username'],
+            conteudo=dados['conteudo'],
+            curso=dados['curso'],
+            naula=dados['naula'],
+            checkin=dados['checkin'],
+            checkout=dados['checkout']
         )
 
     def to_json(self):
         return {
-            'membro': self.membro,
-            'data': self.data,
-            'conteudo': self.data
+            'username': self.username,
+            'conteudo': self.conteudo,
+            'curso': self.curso,
+            'naula': self.naula,
+            'checkin': self.checkin,
+            'checkout': self.checkout
         }
 
 
-# class Membro:
-#     def __init__(
-#             self,
-#             nome=None,
-#     ):
-#         self.nome = nome
-#
-#     @staticmethod
-#     def from_json(dados):
-#         return Membro(
-#             nome=dados['nome']
-#         )
-#
-#     def to_json(self):
-#         return {
-#             'nome': self.nome
-#         }
+class Usuario:
+    def __init__(
+            self,
+            username=None,
+            last_login=None,
+            pwd=None,
+            hrs_semana=None,
+            email=None,
+            relatorios=None
+    ):
+        self.username = username
+        self.last_login = last_login
+        self._pwd = pwd
+        self.hrs_semana = hrs_semana
+        self.email = email if email else "null@null.com"
+        self.relatorios = relatorios
+
+    @staticmethod
+    def from_json(dados):
+        return Usuario(
+            username=dados['username'],
+            last_login=dados['last_login'],
+            hrs_semana=dados['hrs_semana']
+        )
+
+    @staticmethod
+    def from_djangoUser(user):
+        return Usuario(
+            username=user.username,
+            last_login=user.last_login,
+        )
+
+    def to_json(self):
+        return {
+            'username': self.username,
+            'last_login': self.last_login,
+            'hrs_semana': self.hrs_semana
+        }
+
+    def create_and_save(self):
+        djangoUser.objects.create_user(self.username, self.email, self._pwd)
+
+    @staticmethod
+    def get_all():
+        return djangoUser.objects.all()
+
+
+# to add a user
+# Usuario(username="slim", pwd="123").create_and_save()
+# print("Usuario adicionado!")
