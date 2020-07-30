@@ -5,7 +5,6 @@ class Relatorio:
     def __init__(
             self,
             membro=None,
-            data=None,
             conteudo=None,
             curso=None,
             naula=None,
@@ -13,7 +12,6 @@ class Relatorio:
             checkout=None
     ):
         self.membro = membro
-        self.data = data
         self.conteudo = conteudo
         self.curso = curso
         self.naula = naula
@@ -24,7 +22,6 @@ class Relatorio:
     def from_json(dados):
         return Relatorio(
             membro=dados['membro'],
-            data=dados['data'],
             conteudo=dados['conteudo'],
             curso=dados['curso'],
             naula=dados['naula'],
@@ -35,8 +32,7 @@ class Relatorio:
     def to_json(self):
         return {
             'membro': self.membro,
-            'data': self.data,
-            'conteudo': self.data,
+            'conteudo': self.conteudo,
             'curso': self.curso,
             'naula': self.naula,
             'checkin': self.checkin,
@@ -47,14 +43,14 @@ class Relatorio:
 class Usuario:
     def __init__(
             self,
-            nome=None,
+            username=None,
             last_login=None,
             situacao=None,
             pwd=None,
             hrs_semana=None,
             email=None
     ):
-        self.nome = nome
+        self.username = username
         self.last_login = last_login
         self.situacao = situacao
         self._pwd = pwd
@@ -64,19 +60,17 @@ class Usuario:
     @staticmethod
     def from_json(dados):
         return Usuario(
-            nome=dados['nome'],
+            username=dados['username'],
             last_login=dados['last_login'],
             situacao=dados['situacao'],
-            pwd=dados['pwd'],
             hrs_semana=dados['hrs_semana']
         )
 
     def to_json(self):
         return {
-            'nome': self.nome,
+            'username': self.username,
             'last_login': self.last_login,
             'situacao': self.situacao,
-            'pwd': self._pwd,
             'hrs_semana': self.hrs_semana
         }
 

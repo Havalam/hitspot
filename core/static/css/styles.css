@@ -12,6 +12,11 @@
     margin: 0;
 }
 
+.spanalert {
+    background-color: rgba(220, 20, 60, 0.349);
+    border-left: 5px solid crimson;
+}
+
 @media screen and (min-width: 1100px) {
     .scopo {
       width: 27%;

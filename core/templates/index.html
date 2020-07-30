@@ -1,17 +1,17 @@
 {% extends "layout.html" %}
 <!---->
 {% block content %}
-    <form action="">
+    <form class="card-body" action="{% url 'index' %}", method="post" autocomplete="off">
+        {% csrf_token %}
         <div class="form-group">
-            <label for="exampleFormControlTextarea1">Relatorio Final de Atividade Relizada</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             <label for="curso">Qual curso você estava vendo agora?</label>
-            <input type="text" name="curso" id="curso" placeholder="Nome do Curso" class="form-control">
+            <input type="text" name="curso" id="curso" placeholder="Nome do Curso" class="form-control" required>
             <div class="mid_width">
                 <label for="naula">Qual aula desse curso você estava vendo agora?</label>
-                <input type="number" name="naula" id="naula" placeholder="Nº da aula" class="form-control">
+                <input type="number" name="naula" id="naula" placeholder="Nº da aula" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-success top_space">Check In</button>
+            <label for="exampleFormControlTextarea1">Relatorio Final de Atividade Relizada</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="conteudo" rows="3" required></textarea>
             <button type="submit" class="btn btn-danger top_space">Check Out</button>
         </div>
     </form>
