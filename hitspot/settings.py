@@ -2,7 +2,7 @@ import os
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SECRET_KEY = '8314l3%r9&v7$23vcjjzavrf#hsy+5rqd61@99=-6wda6%&$!c'
+SECRET_KEY = '00000000000000000000000000000000000000000000000000'
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
@@ -49,7 +49,10 @@ WSGI_APPLICATION = 'hitspot.wsgi.application'
 
 
 DATABASES = {
-    'default': {}
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 

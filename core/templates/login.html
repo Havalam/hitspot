@@ -5,12 +5,11 @@
     <div class="card-header">
         Autenticação
     </div>
-    <div class="card-body">
-        <h5 class="card-title">Usuario:</h5>
-        <input type="text" class="form-control">
-        <h5 class="card-title">Senha:</h5>
-        <input type="text" class="form-control">
-        <a href="#" class="btn btn-primary top_space">Login</a>
-    </div>
+    <form class="card-body"  action="{% url 'login' %}", method="post" autocomplete="off">
+        {% csrf_token %}
+        <input type="text" name="username" class="form-control" placeholder="Usuario">
+        <input type="password" name="pwd" class="form-control" placeholder="Senha">
+        <button type="submit" class="btn btn-primary top_space">Login</a>
+    </form>
 </div>
 {% endblock %}

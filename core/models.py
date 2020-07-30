@@ -1,3 +1,6 @@
+from django.contrib.auth.models import User as djangoUser
+
+
 class Relatorio:
     def __init__(
             self,
@@ -48,13 +51,15 @@ class Usuario:
             last_login=None,
             situacao=None,
             pwd=None,
-            hrs_semana=None
+            hrs_semana=None,
+            email=None
     ):
         self.nome = nome
         self.last_login = last_login
         self.situacao = situacao
         self._pwd = pwd
         self.hrs_semana = hrs_semana
+        self.email = email if email else "null@null.com"
 
     @staticmethod
     def from_json(dados):
@@ -74,3 +79,11 @@ class Usuario:
             'pwd': self._pwd,
             'hrs_semana': self.hrs_semana
         }
+
+    def create_and_save(self):
+        djangoUser.objects.create_user(self.nome, self.email, self._pwd)
+
+
+# to add a user
+# Usuario(nome="slim", pwd="123").create_and_save()
+# print("Usuario adicionado!")
