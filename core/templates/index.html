@@ -4,14 +4,12 @@
     <form class="card-body" action="{% url 'index' %}", method="post" autocomplete="off">
         {% csrf_token %}
         <div class="form-group">
-            <label for="curso">Qual curso você estava vendo agora?</label>
-            <input type="text" name="curso" id="curso" placeholder="Nome do Curso" class="form-control" required>
-            <div class="mid_width">
-                <label for="naula">Qual aula desse curso você estava vendo agora?</label>
-                <input type="number" name="naula" id="naula" placeholder="Nº da aula" class="form-control" required>
-            </div>
             <label for="exampleFormControlTextarea1">Relatorio Final de Atividade Relizada</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" name="conteudo" rows="3" required></textarea>
+            <input type="text" name="curso" id="curso" placeholder="Nome do Curso" class="top_space form-control" required>
+            <div class="mid_width">
+                <input type="number" name="naula" id="naula" placeholder="Nº da aula" class="form-control" required>
+            </div>
             <button type="submit" class="btn btn-danger top_space">Check Out</button>
         </div>
     </form>
