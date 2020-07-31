@@ -4,9 +4,9 @@
 <div>
     {% if usuarios %}
     {% for usuario in usuarios %}
-    <div class="card border-primary mb-3" style="width: 24rem;">
+    <div class="card border-primary mb-3 user_card_width scopo">
         <div class="card-body">
-            <h5 class="card-title">{{ usuario.username }}</h5>
+            <h4 class="card-title text-center"><b>{{ usuario.username }}</b></h4>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Ultimo login: <b>{{ usuario.last_login }}</b></li>

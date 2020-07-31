@@ -3,18 +3,17 @@
 {% block content %}
 <main>
     {% if relatorios %}
+    <h1>Relatorios <b>{{ username }}</b></h1>
     {% for relatorio in relatorios %}
     <article class="scopo">
-        <div class="card border-info mb-3" style="width: 18rem;">
-            <div class="card-body">
-                <h4 class="card-title"><b>{{ relatorio.username }}</b></h4>
+        <div class="card border-info report_card_width mb-3">
+            <div class="card-body" style="height: 12rem; overflow: auto;">
                 <p class="card-text">{{ relatorio.conteudo }}</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{ relatorio.curso }}</li>
-                <li class="list-group-item">{{ relatorio.naula }}</li>
-                <li class="list-group-item">Checkin: {{ relatorio.checkin }}</li>
-                <li class="list-group-item">Checkout: {{ relatorio.checkout }}</li>
+                <li class="list-group-item">{{ relatorio.curso }} - {{ relatorio.naula }}</li>
+                <li class="list-group-item">In: {{ relatorio.checkin }}</li>
+                <li class="list-group-item">Out: {{ relatorio.checkout }}</li>
             </ul>
         </div>
     </article>
