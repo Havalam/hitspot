@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
-from datetime import datetime as dt
-from pprint import pprint
+from datetime import datetime as dt, timedelta as delta
 
 from .models import Relatorio, Usuario
 from hitspot.db import getdb
@@ -81,8 +80,11 @@ def get_hours_week_and_reports_user(user):
     segundos = 0
     relatorios = list()
     data = db["relatorios"].find({'username': user})
+    hj = dt.now()
+    segunda = hj - delta(days=hj.weekday())
     for r in data:
-        segundos += (r["checkout"] - r["checkin"]).total_seconds()
+        if r["checkin"] > segunda:
+            segundos += (r["checkout"] - r["checkin"]).total_seconds()
         relatorios.append(Relatorio.from_json(r))
     horas = int(segundos // 3600)
     minutos = int((segundos % 3600) // 60)
