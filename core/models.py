@@ -88,5 +88,5 @@ class Usuario:
 
 
 # to add a user
-# Usuario(username="slim", pwd="123").create_and_save()
+# Usuario(username="danielb", pwd="123").create_and_save()
 # print("Usuario adicionado!")

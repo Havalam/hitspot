@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
-from datetime import datetime as dt, timedelta as delta
+from datetime import datetime as dt, timedelta as delta, timezone
 
 from .models import Relatorio, Usuario
 from hitspot.db import getdb
@@ -34,6 +34,8 @@ def area_membros(request):
     for u in Usuario().get_all():
         aux_user = Usuario.from_djangoUser(u)
         aux_user.hrs_semana, aux_user.relatorios = get_hours_week_and_reports_user(u.username)
+        if aux_user.last_login is not None:
+            aux_user.last_login += get_delta_less3()
         usuarios.append(aux_user)
     context = {
         "usuarios": usuarios
@@ -66,22 +68,36 @@ def logar_usuario(request):
 
 def get_time():
     date_format = "%Y-%m-%d %H:%M:%S.000Z"
-    return dt.strptime(dt.now().strftime(date_format), date_format)
+    return dt.strptime(dt.now(get_sp_tz()).strftime(date_format), date_format)
 
 
 def get_last_user_checkin(user):
     usuarios = Usuario().get_all()
     for u in usuarios:
         if u.username == user:
+            u.last_login += get_delta_less3()
             return u.last_login
+
+
+def get_delta_less3():
+    return delta(hours=-3)
+
+
+def get_sp_tz():
+    return timezone(get_delta_less3())
 
 
 def get_hours_week_and_reports_user(user):
     segundos = 0
     relatorios = list()
     data = db["relatorios"].find({'username': user})
-    hj = dt.now()
-    segunda = hj - delta(days=hj.weekday())
+    hj = dt.now(get_sp_tz())
+    if hj.weekday():
+        d = delta(days=hj.weekday())
+        s = hj - d
+    else:
+        s = hj
+    segunda = dt(s.year, s.month, s.day)
     for r in data:
         if r["checkin"] > segunda:
             segundos += (r["checkout"] - r["checkin"]).total_seconds()
