@@ -11,7 +11,9 @@
                 <p class="card-text">{{ relatorio.conteudo }}</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{ relatorio.curso }} - {{ relatorio.naula }}</li>
+                <li class="list-group-item name_curso_card">
+                    {{ relatorio.curso }} - {{ relatorio.naula }}
+                </li>
                 <li class="list-group-item">In: {{ relatorio.checkin }}</li>
                 <li class="list-group-item">Out: {{ relatorio.checkout }}</li>
             </ul>
