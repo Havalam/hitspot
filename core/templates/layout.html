@@ -10,10 +10,17 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
         crossorigin="anonymous"
     >
+    <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="icon" href="{% static 'images/logo.png' %}" />
 </head>
 <body>
+    <script>
+        var footerAdjust = true;
+    </script>
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-primary navbar-light bg-light">
             <img
@@ -22,13 +29,25 @@
                 class="d-inline-block align-top" 
                 alt="logo"
             >
-            <a class="nav-link" href="{% url 'index' %}">HitsPot <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url 'index' %}">HitsPot</a>
             <a class="nav-link" href="{% url 'area_membros' %}">Membros</a>
         </nav>
         <hr>
         {% block content %}
-            <h1>Sem Conteúdo</h1>
+        <h1>Sem Conteúdo</h1>
         {% endblock %}
     </div>
+    <footer id="footer" class="page-footer">
+        <div class="text-center">
+            <p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/miqueias85594/"><i class="fa fa-instagram"></i></a>
+                    <a href="https://github.com/Havalam"><i class="fa fa-github"></i></a>
+                </div>
+              </p>
+            © 2020 Copyright: Havalam
+        </div>
+    </footer>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-<!---->
+{% load static %}
 {% block content %}
 <div class="card mid_width border-primary mb-3 top_space">
     <div class="card-header">
@@ -15,4 +15,7 @@
 {% if erro %}
 <h5 class="spanalert mid_width">Usuario e/ou senha incorretos</h5>
 {% endif %}
+<script>
+    footerAdjust = false;
+</script>
 {% endblock %}
