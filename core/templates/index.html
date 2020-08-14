@@ -1,19 +1,37 @@
 {% extends "layout.html" %}
 <!---->
 {% block content %}
+<div class="timer" id="timer"></div>
 <form class="card-body" action="{% url 'index' %}", method="post" autocomplete="off">
     {% csrf_token %}
-    <div class="form-group">
-        <label for="exampleFormControlTextarea1">Relatorio Final de Atividade Relizada</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" name="conteudo" rows="3" required></textarea>
+    <div class="form-group mid_width">
+        <label for="content">Relatorio Final de Atividade Relizada</label>
+        <textarea class="form-control" id="content" name="conteudo" rows="5" required></textarea>
         <input type="text" name="curso" id="curso" placeholder="Nome do Curso" class="top_space form-control" required>
-        <div class="mid_width">
-            <input type="number" name="naula" id="naula" placeholder="Nº da aula" class="form-control" required>
-        </div>
+        <input type="number" name="naula" id="naula" placeholder="Nº da aula" class="form-control" required>
         <button type="submit" class="btn btn-danger top_space">Check Out</button>
     </div>
 </form>
+<p style="visibility: hidden;" id="checkin">{{ checkin }}</p>
 <script>
     footerAdjust = false;
+
+    let hora_atual;
+    let tempo_restante;
+
+    let millis = parseInt(document.getElementById("checkin").innerHTML);
+    let limit_checkout = new Date(millis + 7200000);
+
+    window.setInterval(function () {
+        hora_atual = new Date();
+        tempo_restante = new Date(limit_checkout - hora_atual);
+        tempo_restante_string =
+            (tempo_restante.getHours() - 21) +
+            ":" +
+            tempo_restante.getMinutes() +
+            ":" +
+            tempo_restante.getSeconds();
+        document.getElementById("timer").innerHTML = tempo_restante_string;
+    }, 1000);
 </script>
 {% endblock content %}

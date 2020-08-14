@@ -13,12 +13,13 @@ db = getdb()
 
 @login_required(login_url='/login')
 def index(request):
+    user = str(request.user)
+    checkin = get_last_user_checkin(user)
     if str(request.method) == "POST":
-        user = str(request.user)
         relatorio = Relatorio(
             username=user,
             checkout=get_time(),
-            checkin=get_last_user_checkin(user),
+            checkin=checkin,
             conteudo=request.POST["conteudo"],
             naula=request.POST["naula"],
             curso=request.POST["curso"]
@@ -26,7 +27,10 @@ def index(request):
         db["relatorios"].insert_one(relatorio.to_json())
         logout(request)
         return redirect("login")
-    return render(request, "index.html")
+    content = {
+        'checkin': get_millis_since_epoch(checkin)
+    }
+    return render(request, "index.html", content)
 
 
 def area_membros(request):
@@ -105,3 +109,9 @@ def get_hours_week_and_reports_user(user):
     horas = int(segundos // 3600)
     minutos = int((segundos % 3600) // 60)
     return f"{horas} horas e {minutos} minutos", relatorios
+
+
+def get_millis_since_epoch(h):
+    indate = dt(h.year, h.month, h.day, h.hour, h.minute)
+    epoch = dt.utcfromtimestamp(0) + get_delta_less3()
+    return (indate - epoch).total_seconds() * 1000.0

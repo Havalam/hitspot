@@ -31,6 +31,9 @@
             >
             <a class="nav-link" href="{% url 'index' %}">HitsPot</a>
             <a class="nav-link" href="{% url 'area_membros' %}">Membros</a>
+            <div class="social-icons">
+                <a class="nav-link" href="https://github.com/Havalam/hitspot"><i class="fa fa-github"></i></a>
+            </div>
         </nav>
         <hr>
         {% block content %}
@@ -39,13 +42,7 @@
     </div>
     <footer id="footer" class="page-footer">
         <div class="text-center">
-            <p>
-                <div class="social-icons">
-                    <a href="https://www.instagram.com/miqueias85594/"><i class="fa fa-instagram"></i></a>
-                    <a href="https://github.com/Havalam"><i class="fa fa-github"></i></a>
-                </div>
-              </p>
-            © 2020 Copyright: Havalam
+            Copyright &copy; Havalam
         </div>
     </footer>
     <script src="{% static 'js/script.js' %}"></script>

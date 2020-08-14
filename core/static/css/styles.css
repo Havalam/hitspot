@@ -1,3 +1,7 @@
+:root {
+    --hblue: #1fc8db;
+}
+
 .top_space {
     margin-top: 2%;
 }
@@ -38,12 +42,12 @@ footer {
     bottom: 0;
     width: 100%;
     line-height: 60px;
-    background-color: #1fc8db;
+    background-color: var(--hblue);
 }
 
 .social-icons a {
     font-size: 1.8em;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--hblue);
     margin-right: 3%;
 }
 
@@ -52,9 +56,16 @@ margin-right: 0;
 }
 
 .social-icons a:hover {
-color: rgb(255, 255, 255);
+color: darkgray;
 }
 
+.timer {
+    float: right;
+    background-color: var(--hblue);
+    padding: 1rem;
+    border-radius: 0.5em;
+    box-shadow: 1px 1px 5px 1px darkgray;
+}
 
 @media screen and (min-width: 1100px) {
     .scopo {
