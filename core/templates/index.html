@@ -12,15 +12,23 @@
         <button type="submit" class="btn btn-danger top_space">Check Out</button>
     </div>
 </form>
-<p style="visibility: hidden;" id="checkin">{{ checkin }}</p>
+<p style="display: none;" id="checkin">{{ checkin }}</p>
 <script>
     footerAdjust = false;
+    let url = 'http://127.0.0.1:8000';
 
     let hora_atual;
     let tempo_restante;
 
     let millis = parseInt(document.getElementById("checkin").innerHTML);
-    let limit_checkout = new Date(millis + 7200000);
+    let limit_checkout = new Date(millis + 3600000);
+
+
+    function logout(){
+        window.open(url + '/logout', "_self");
+        alert("Voce foi deslogado por exceder o tempo limite de 1 hora!")
+    }
+
 
     window.setInterval(function () {
         hora_atual = new Date();
@@ -31,6 +39,11 @@
             tempo_restante.getMinutes() +
             ":" +
             tempo_restante.getSeconds();
+        
+        if (tempo_restante < new Date(0)){
+            logout()
+        }
+
         document.getElementById("timer").innerHTML = tempo_restante_string;
     }, 1000);
 </script>

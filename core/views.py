@@ -70,6 +70,12 @@ def logar_usuario(request):
     return render(request, "login.html", context)
 
 
+@login_required(login_url='/login')
+def deslogar_usuario(request):
+    logout(request)
+    return redirect("login")
+
+
 def get_time():
     date_format = "%Y-%m-%d %H:%M:%S.000Z"
     return dt.strptime(dt.now(get_sp_tz()).strftime(date_format), date_format)
@@ -112,6 +118,6 @@ def get_hours_week_and_reports_user(user):
 
 
 def get_millis_since_epoch(h):
-    indate = dt(h.year, h.month, h.day, h.hour, h.minute)
+    indate = dt(h.year, h.month, h.day, h.hour, h.minute, h.second)
     epoch = dt.utcfromtimestamp(0) + get_delta_less3()
     return (indate - epoch).total_seconds() * 1000.0
