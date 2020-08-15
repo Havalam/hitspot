@@ -1,3 +1,7 @@
+:root {
+    --hblue: #1fc8db;
+}
+
 .top_space {
     margin-top: 2%;
 }
@@ -25,6 +29,42 @@
     height: 4rem;
     overflow-x: auto;
     white-space: nowrap;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+footer {
+    position: absolute;
+    float: left;
+    bottom: 0;
+    width: 100%;
+    line-height: 60px;
+    background-color: var(--hblue);
+}
+
+.social-icons a {
+    font-size: 1.8em;
+    color: var(--hblue);
+    margin-right: 3%;
+}
+
+.social-icons a:last-child {
+margin-right: 0;
+}
+
+.social-icons a:hover {
+color: darkgray;
+}
+
+.timer {
+    float: right;
+    background-color: var(--hblue);
+    padding: 1rem;
+    border-radius: 0.5em;
+    box-shadow: 1px 1px 5px 1px darkgray;
 }
 
 @media screen and (min-width: 1100px) {
